@@ -1,6 +1,7 @@
 <?php
 
-html_page_top( plugin_lang_get( 'configuration' ) );
+layout_page_header( plugin_lang_get( 'configuration' ) );
+layout_page_begin();
 $t_foo_or_bar = plugin_config_get( 'foo_or_bar' );
 
 ?>
@@ -34,4 +35,4 @@ $t_foo_or_bar = plugin_config_get( 'foo_or_bar' );
 
 <?php
 
-html_page_bottom();
+layout_page_end();
