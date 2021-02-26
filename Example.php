@@ -1,19 +1,22 @@
 <?php
 class ExamplePlugin extends MantisPlugin {
     function register() {
-        $this->name = 'Example';    # Proper name of plugin
-        $this->description = '';    # Short description of the plugin
-        $this->page = '';           # Default plugin page
+        $this->name = plugin_lang_get( 'title' );
+                                             # Proper name of plugin
+        $this->description = plugin_lang_get( 'description' );
+                                             # Short description of the plugin
+        $this->page = 'config';              # Default plugin page
 
-        $this->version = '1.0';     # Plugin version string
-        $this->requires = array(    # Plugin dependencies
-            'MantisCore' => '2.0',  # Should always depend on an appropriate
-                                    # version of MantisBT
+        $this->version = '2.0';              # Plugin version string
+        $this->requires = array(             # Plugin dependencies
+            'MantisCore' => '2.0',           # Should always depend on an appropriate
+                                             # version of MantisBT
         );
 
-        $this->author = '';         # Author/team name
-        $this->contact = '';        # Author/team e-mail address
-        $this->url = '';            # Support webpage
+        $this->author = 'MantisBT Team';     # Author/team name
+        $this->contact = 'mantisbt-dev@lists.sourceforge.net';
+                                             # Author/team e-mail address
+        $this->url = 'https://mantisbt.org'; # Support webpage
     }
 
     function events() {
@@ -25,15 +28,21 @@ class ExamplePlugin extends MantisPlugin {
 
     function hooks() {
         return array(
+            'EVENT_MENU_MAIN' => 'menu',
+
             'EVENT_EXAMPLE_FOO' => 'foo',
             'EVENT_EXAMPLE_BAR' => 'bar',
         );
     }
 
-    function config() {
-        return array(
-            'foo_or_bar' => 'foo',
+    function menu() {
+        $t_menu[] = array(
+            'title' => $this->name,
+            'url' => plugin_page( 'foo' ),
+            'access_level' => ANYBODY,
+            'icon' => 'fa-smile-o'
         );
+        return $t_menu;
     }
 
     function foo( $p_event ) {
@@ -42,6 +51,12 @@ class ExamplePlugin extends MantisPlugin {
 
     function bar( $p_event, $p_chained_param ) {
         return str_replace( 'foo', 'bar', $p_chained_param );
+    }
+
+    function config() {
+        return array(
+            'foo_or_bar' => 'foo',
+        );
     }
 
 }
