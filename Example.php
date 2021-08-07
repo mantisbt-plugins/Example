@@ -7,7 +7,7 @@ class ExamplePlugin extends MantisPlugin {
                                              # Short description of the plugin
         $this->page = 'config';              # Default plugin page
 
-        $this->version = '2.0';              # Plugin version string
+        $this->version = '2.0.1';            # Plugin version string
         $this->requires = array(             # Plugin dependencies
             'MantisCore' => '2.0',           # Should always depend on an appropriate
                                              # version of MantisBT
